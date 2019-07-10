@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sking.dbmapper.BaseRolesMapper">
+  <resultMap id="BaseResultMap" type="com.sking.dbentity.BaseRoles">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="roleid" jdbcType="CHAR" property="roleid" />
+    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="create_time" jdbcType="DATE" property="createTime" />
+    <result column="update_time" jdbcType="DATE" property="updateTime" />
+    <result column="order_no" jdbcType="INTEGER" property="orderNo" />
+    <result column="role_level" jdbcType="INTEGER" property="roleLevel" />
+    <result column="del_flag" jdbcType="INTEGER" property="delFlag" />
+  </resultMap>
+</mapper>

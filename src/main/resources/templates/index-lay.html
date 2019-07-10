@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>sking+ 主页面</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}" href="../static/layui/css/layui.css">
+    <link rel="stylesheet" th:href="@{/layui/css/admin.css}" href="../static/layui/css/admin.css">
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+
+    <!--header-->
+    <div  th:replace="header-lay.html::header"></div>
+
+    <!-- 侧边菜单 -->
+    <div class="layui-side layui-side-menu">
+        <div class="layui-side-scroll">
+            <div class="layui-logo" lay-href="home/console.html">
+                <span>layuiAdmin</span>
+            </div>
+
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed" th:each="menu : ${baseModulesList}">
+                    <a class="" href="javascript:;" th:utext="${menu.moduleName}">所有商品</a>
+                    <dl class="layui-nav-child">
+                        <dd th:each="cmenu : ${menu.childModuleList}">
+                            <a  th:class="menuItem" th:href="|javascript:addTabs('${cmenu.moduleName}','${cmenu.moduleUrl}')|" th:utext="${cmenu.moduleName}" >二级菜单</a>
+                        </dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 页面标签 -->
+    <div class="layadmin-pagetabs" id="LAY_app_tabs">
+        <div class="layui-icon layadmin-tabs-control layui-icon-prev" layadmin-event="leftPage"></div>
+        <div class="layui-icon layadmin-tabs-control layui-icon-next" layadmin-event="rightPage"></div>
+        <div class="layui-icon layadmin-tabs-control layui-icon-down">
+            <ul class="layui-nav layadmin-tabs-select" lay-filter="layadmin-pagetabs-nav">
+                <li class="layui-nav-item" lay-unselect>
+                    <a href="javascript:;"></a>
+                    <dl class="layui-nav-child layui-anim-fadein">
+                        <dd layadmin-event="closeThisTabs"><a href="javascript:;" onclick="removeThisTab()">关闭当前标签页</a></dd>
+                        <dd layadmin-event="closeOtherTabs"><a href="javascript:;">关闭其它标签页</a></dd>
+                        <dd layadmin-event="closeAllTabs"><a href="javascript:;" onclick="removeAllTabs();">关闭全部标签页</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+        <div class="layui-tab" lay-unauto lay-allowClose="true" lay-filter="tabs">
+            <ul class="layui-tab-title" id="LAY_app_tabsheader">
+                <li lay-id="home/console.html" lay-attr="home/console.html" class="layui-this"><i class="layui-icon layui-icon-home"></i></li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">内容1</div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        © layui.com - 底部固定区域
+    </div>
+</div>
+    <!--引用js-->
+    <div th:include="footer-js.html::footerjs"></div>
+</body>
+</html>

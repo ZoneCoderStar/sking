@@ -1,0 +1,58 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"><!--引入头部文件-->
+<head th:replace="header::commonheader">
+
+</head>
+
+<body>
+<div id="wrapper">
+    <!-- 引入左侧栏目-->
+    <div th:replace="left.html::commonleft"></div>
+
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+        <!--引入头部工具-->
+        <div th:replace="titletool.html :: commontitletool"></div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>基本面板 <small class="m-l-sm">这是一个自定义面板</small></h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="tabs_panels.html#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="tabs_panels.html#">选项1</a>
+                                </li>
+                                <li><a href="tabs_panels.html#">选项2</a>
+                                </li>
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <h2>
+                            Bootstrap<br/>
+                        </h2>
+                        <p>
+                            简洁、直观、强悍的前端开发框架，让web开发更迅速、简单。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--引入底部-->
+        <div class="footer" th:include="footer :: commonfooter"></div>
+    </div>
+</div>
+<!--引入js-->
+<div th:replace="indexjs.html::indexjs"></div>
+
+
+</body>
+
+</html>

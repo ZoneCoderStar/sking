@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sking.dbmapper.BaseUsersRolesMapper">
+  <resultMap id="BaseResultMap" type="com.sking.dbentity.BaseUsersRoles">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="userid" jdbcType="CHAR" property="userid" />
+    <result column="roleid" jdbcType="CHAR" property="roleid" />
+  </resultMap>
+</mapper>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sking.mapper.BaseModulesMapper">
+  <resultMap id="BaseResultMap" type="com.sking.entity.BaseModules">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="moduleid" jdbcType="CHAR" property="moduleid" />
+    <result column="module_name" jdbcType="VARCHAR" property="moduleName" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="create_time" jdbcType="DATE" property="createTime" />
+    <result column="update_time" jdbcType="DATE" property="updateTime" />
+    <result column="order_no" jdbcType="INTEGER" property="orderNo" />
+    <result column="module_url" jdbcType="INTEGER" property="moduleUrl" />
+    <result column="parent_id" jdbcType="CHAR" property="parentId" />
+    <result column="img_url" jdbcType="VARCHAR" property="imgUrl" />
+    <result column="del_flag" jdbcType="INTEGER" property="delFlag" />
+    <result column="power_num" jdbcType="VARCHAR" property="powerNum" />
+
+  </resultMap>
+
+  <resultMap id="allModelResultMap" type="com.sking.model.BaseModulesModel">
+      <!--
+            WARNING - @mbg.generated
+          -->
+      <id column="moduleid" jdbcType="CHAR" property="moduleid" />
+      <result column="module_name" jdbcType="VARCHAR" property="moduleName" />
+      <result column="state" jdbcType="INTEGER" property="state" />
+      <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+      <result column="create_time" jdbcType="DATE" property="createTime" />
+      <result column="update_time" jdbcType="DATE" property="updateTime" />
+      <result column="order_no" jdbcType="INTEGER" property="orderNo" />
+      <result column="module_url" jdbcType="INTEGER" property="moduleUrl" />
+      <result column="parent_id" jdbcType="CHAR" property="parentId" />
+      <result column="img_url" jdbcType="VARCHAR" property="imgUrl" />
+      <result column="del_flag" jdbcType="INTEGER" property="delFlag" />
+      <result column="power_num" jdbcType="VARCHAR" property="powerNum" />
+
+      <collection property="childModuleList" ofType="com.sking.entity.BaseModules">
+          <id column="c_moduleid" jdbcType="CHAR" property="moduleid" />
+          <result column="c_module_name" jdbcType="VARCHAR" property="moduleName" />
+          <result column="c_state" jdbcType="INTEGER" property="state" />
+          <result column="c_remarks" jdbcType="VARCHAR" property="remarks" />
+          <result column="c_create_time" jdbcType="DATE" property="createTime" />
+          <result column="c_update_time" jdbcType="DATE" property="updateTime" />
+          <result column="c_order_no" jdbcType="INTEGER" property="orderNo" />
+          <result column="c_module_url" jdbcType="INTEGER" property="moduleUrl" />
+          <result column="c_parent_id" jdbcType="CHAR" property="parentId" />
+          <result column="c_img_url" jdbcType="VARCHAR" property="imgUrl" />
+          <result column="c_del_flag" jdbcType="INTEGER" property="delFlag" />
+          <result column="c_power_num" jdbcType="VARCHAR" property="powerNum" />
+
+      </collection>
+  </resultMap>
+
+
+    <select id="selectAllModulestList" parameterType="com.sking.entity.BaseModules" resultMap="allModelResultMap"  >
+        SELECT
+        pm.update_time,
+        pm.state,
+        pm.remarks,
+        pm.order_no,
+        pm.moduleid,
+        pm.module_url,
+        pm.module_name,
+        pm.create_time,
+        pm.parent_id,
+        pm.img_url,
+        pm.power_num,
+        cm.update_time AS c_update_time,
+        cm.state AS c_state,
+        cm.remarks AS c_remarks,
+        cm.order_no AS c_order_no,
+        cm.moduleid AS c_moduleid,
+        cm.module_url AS c_module_url,
+        cm.module_name AS c_module_name,
+        cm.create_time AS c_create_time,
+        cm.parent_id AS c_parent_id,
+        cm.img_url AS c_img_url,
+        cm.power_num AS c_power_num
+        FROM
+        base_modules pm,
+        base_modules cm
+        WHERE
+        cm.parent_id = pm.moduleid
+        <if test="moduleid!=null">
+            AND pm.moduleid = #{moduleid}
+        </if>
+    </select>
+
+    <select id="selectModulesListByUserid" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT
+        m.*
+    FROM
+        base_users u,
+        base_users_roles ur,
+        base_roles r,
+        base_roles_modules rm,
+        base_modules m
+    WHERE
+        u.userid = ur.userid
+        AND ur.roleid = r.roleid
+        AND r.roleid = rm.roleid
+        AND rm.moduleid = m.moduleid
+        AND u.userid = #{userid}
+  </select>
+
+</mapper>

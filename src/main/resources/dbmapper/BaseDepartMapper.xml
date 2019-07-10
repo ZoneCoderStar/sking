@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sking.dbmapper.BaseDepartMapper">
+  <resultMap id="BaseResultMap" type="com.sking.dbentity.BaseDepart">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="depart_id" jdbcType="BIGINT" property="departId" />
+    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+    <result column="ancestors" jdbcType="VARCHAR" property="ancestors" />
+    <result column="depart_name" jdbcType="VARCHAR" property="departName" />
+    <result column="order_num" jdbcType="INTEGER" property="orderNum" />
+    <result column="leader" jdbcType="VARCHAR" property="leader" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="del_flag" jdbcType="INTEGER" property="delFlag" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+</mapper>

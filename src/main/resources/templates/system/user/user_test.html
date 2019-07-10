@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('用户列表')" />
+    <th:block th:include="include :: layout-latest-css" />
+    <th:block th:include="include :: ztree-css" />
+</head>
+<body class="gray-bg">
+<div class="container-div ui-layout-center">
+
+    <div class="col-sm-12 select-table table-striped">
+        <table id="DataQueryTable" data-mobile-responsive="true"></table>
+    </div>
+    <button onclick="sqlExecute();"></button>
+</div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: layout-latest-js" />
+    <th:block th:include="include :: ztree-js" />
+    <script th:inline="javascript">
+        var prefix = ctx + "system/user";
+        /**
+         *  BsTable动态表格生成
+         */
+        sqlExecute = function (){
+
+            $('#DataQueryTable').bootstrapTable({
+                ajax: function (request) {
+                    $.ajax({
+                        type: "GET",
+                        url: prefix + "/testUserList",
+                        contentType: "application/json;charset=utf-8",
+                        dataType: "json",
+                        json: 'callback',
+                        success: function (json) {
+
+                            var dynamicHeader = [];
+                            dynamicHeader.push({
+                                field: "state",
+                                check: true
+                            });
+                            var header=[{
+                                checkbox: true
+                            },
+                                {
+                                    field: 'userid',
+                                    title: '用户ID'
+                                },
+                                {
+                                    field: 'loginnum',
+                                    title: '登录名称',
+                                    sortable: true
+                                },
+                                {
+                                    field: 'name',
+                                    title: '用户名称'
+                                },
+                                {
+                                    title: '操作',
+                                    align: 'center'
+                                }];
+                            dynamicHeader.push(header);
+
+                            //console.log(Object.keys(json[0]));
+
+                            $('#DataQueryTable').bootstrapTable('destroy').bootstrapTable({
+                                data: json.list,
+                                toolbar: '#toolbar',
+                                cache: false,
+                                striped: true,
+                                sidePagination: "client",
+                                sortOrder: "desc",
+                                pageSize: json.pageSize,
+                                pageNumber: json.pageNum,
+                                pageList: "[25, 50, 100, All]",
+                                showToggle: true,
+                                showColumns: true,
+                                showExport: true,
+                                exportDataType: "basic",
+                                pagination: true,
+                                strictSearch: true,
+                                search: true,
+                                columns: dynamicHeader
+                            });
+                        },
+                        error: function () {
+                            alert("SQL查询错误，请输入正确的SQL语句！");
+                            location.reload();
+                        }
+                    });
+                }
+            });
+        };
+
+    </script>
+</body>
+</html>

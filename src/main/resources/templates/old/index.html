@@ -1,0 +1,49 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"><!--引入头部文件-->
+<head th:replace="header::commonheader">
+
+</head>
+
+<body>
+    <div id="wrapper">
+        <!-- 引入左侧栏目-->
+        <div th:replace="left.html::commonleft"></div>
+
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+            <!--引入头部工具-->
+            <div th:replace="titletool.html :: commontitletool"></div>
+               <!-- <iframe th:src="'/sking/success/toTestListPage'" th:onload="changeFrameHeight()" onload="changeFrameHeight()"  th:id="mainIframe" width="100%" frameborder="0">123123</iframe>-->
+            <!-- th:include="testlist.html :: testlist"-->
+            <!--<div th:id="testlist" id="testlist" > </div>-->
+            <div class="row">
+                <div class="layui-tab layui-tab-brief" lay-allowClose="true" lay-filter="demo">
+                    <ul class="layui-tab-title">
+                        <li class="layui-this">网站设置</li>
+                        <li>用户基本管理</li>
+                        <li>权限分配</li>
+                        <li>全部历史商品管理文字长一点试试</li>
+                        <li>订单管理</li>
+                    </ul>
+                    <div class="layui-tab-content">
+                        <div class="layui-tab-item layui-show">1</div>
+                        <div class="layui-tab-item">2</div>
+                        <div class="layui-tab-item">3</div>
+                        <div class="layui-tab-item">4</div>
+                        <div class="layui-tab-item">5</div>
+                        <div class="layui-tab-item">6</div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--引入底部-->
+            <div class="footer" th:include="footer :: commonfooter"></div>
+        </div>
+    </div>
+    <!--引入js-->
+    <div th:replace="indexjs.html::indexjs"></div>
+
+
+</body>
+
+</html>
